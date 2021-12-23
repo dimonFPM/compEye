@@ -41,20 +41,27 @@ def f1(name_img: str) -> None:
     cv2.waitKey(0)
     # img = cv2.Canny(img, 50, 90, True)
     # print(img.shape)
-    low_green = np.array([45, 100, 50])
-    high_green = np.array([75, 225, 225])
+    low_green = np.array([225, 3, 3])
+    high_green = np.array([110, 32, 32])
     mask = cv2.inRange(img, low_green, high_green)
     img[mask > 0] = ([75, 225, 240])
-    #
+    cv2.imshow("", img)
+    cv2.waitKey(0)
     img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR)
     img = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
     r, img = cv2.threshold(img, 40, 255, 0)
+
     #
     # img = cv2.Canny(img, 50, 90, True)
     # k=np.ones((2,2))
     # img=cv2.dilate(img,k,iterations=2)
     cv2.imshow("", img)
     cv2.waitKey(0)
+
+    # k = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
+    # img = cv2.morphologyEx(img,cv2.MORPH_HITMISS,k)
+    # cv2.imshow("", img)
+    # cv2.waitKey(0)
 
     conture = cv2.findContours(img, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
     conture = imutils.grab_contours(conture)
@@ -68,7 +75,6 @@ def f1(name_img: str) -> None:
     cv2.putText(imgg, "Listik", (x, y), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), thickness=4)
     cv2.imshow("", imgg)
     cv2.waitKey(0)
-
 
 
 f1("../sorce/picture/list.jpeg")

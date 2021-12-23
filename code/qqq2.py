@@ -4,8 +4,8 @@ import numpy as np
 import imutils
 
 k = np.ones((2, 2))
-# imgg = cv2.imread("../sorce/picture/auto2.webp")
-imgg = cv2.imread("../sorce/picture/auto1.jpg")
+imgg = cv2.imread("../sorce/picture/auto2.webp")
+# imgg = cv2.imread("../sorce/picture/auto1.jpg")
 
 img = cv2.cvtColor(imgg, cv2.COLOR_BGR2GRAY)
 img = cv2.bilateralFilter(img, 5, 20, 20)
