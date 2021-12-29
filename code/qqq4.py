@@ -42,26 +42,29 @@ class QQQ4:
 
     def find_nomer(self):
         img = self.img_norm.copy()
-        b, g, r = cv2.split(img)
-        self.show_image(r)
+        # b, g, r = cv2.split(img)
+        # self.show_image(r)
         # img = cv2.bilateralFilter(img, 20, 45, 45)
         # self.show_image(img, name="filter")
 
         print(img[0][0])
         img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        print(img[0][0])
+
+        a = np.array([[[255, 255, 255]]], dtype="uint8")
+        a = cv2.cvtColor(a, cv2.COLOR_BGR2HSV)
+        print(f"{a=}")
 
         # img=img[:,:,0]
         self.show_image(img)
-        low_color = np.array([102, 53, 100])
-        high_color = np.array([102, 53, 255])
+        low_color = np.array([90, 70, 70])
+        high_color = np.array([150, 255, 255])
         mask = cv2.inRange(img, low_color, high_color)
         # print(list(mask))
-        img[mask > 0] = ([120, 53, 233])
+        img[mask > 0] = ([0, 0, 0])
         img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR)
         self.show_image(mask)
-        self.show_image(img)
-        #
+        self.show_image(img, name="final")
+        exit()
 
         # # img=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
         # low_color = np.array([0, 0, 0])
@@ -122,19 +125,19 @@ class QQQ4:
         img = self.img_norm.copy()
 
         b, g, r = cv2.split(img)
-        ret,b = cv2.threshold(b, 90, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        ret, b = cv2.threshold(b, 90, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         print(b)
         self.show_image(b)
 
-        ret, r = cv2.threshold(r, 90, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        ret, r = cv2.threshold(r, 90, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         print(r)
         self.show_image(r)
 
-        ret, g = cv2.threshold(g, 90, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        ret, g = cv2.threshold(g, 90, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         print(g)
         self.show_image(g)
 
-        self.img_norm[r>0]=([0,0,0])
+        self.img_norm[r > 0] = ([0, 0, 0])
         self.show_image(self.img_norm)
 
     def __init__(self, sorce):
@@ -150,6 +153,6 @@ if __name__ == "__main__":
     # a = QQQ4('../sorce/picture/auto3.jpg')
     # a = QQQ4('../sorce/picture/list.jpeg')
     # QQQ4.test()
-    # a.find_nomer()
+    a.find_nomer()
     # a.f()
-    a.color_chech()
+    # a.color_chech()

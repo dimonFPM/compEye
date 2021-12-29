@@ -11,7 +11,7 @@ if not cam.isOpened():
 
 while True:
     check, img = cam.read()
-    # fg = bgSub.apply(img)
+    fg = bgSub.apply(img)
     img = cv2.bilateralFilter(img, 5, 25, 25)
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img_gray = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 9, 2)
@@ -34,5 +34,20 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
+
+# while True:
+#     check, img = cam.read()
+#     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+#     low_lavel = np.uint8([90, 70, 70])
+#     high_lavel = np.uint8([150, 255, 255])
+#     mask = cv2.inRange(img, low_lavel, high_lavel)
+#     k = np.ones((2, 2))
+#     mask = cv2.morphologyEx(mask, cv2.MORPH_HITMISS, k, iterations=2)
+#     img[mask > 0] = [150, 255, 255]
+#     img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR)
+#     cv2.imshow("", img)
+#     if cv2.waitKey(1) & 0xFF == ord("q"):
+#         break
+
 cv2.destroyWindow()
-cv2.release()
+cam.release()
