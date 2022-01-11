@@ -1,5 +1,15 @@
-import matplotlib.pyplot as plt
+import sqlite3 as sq
 
-a=[1,1,1,1,2,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,44,5,5,5,6,6,6,6,6,6]
-plt.hist(a,range=(0,60))
-plt.show()
+try:
+    db = sq.connect("qqq.db", timeout=5)
+    cursor = db.cursor()
+    cursor.execute('''CREATE TABLE student (id INTEGER,
+                                            name TEXT,
+                                            born_date DATE);''')
+    cursor.close()
+except sq.Error as error:
+    print("Ошибка")
+
+if db:
+    db.close()
+    print("база данных закрыта")
