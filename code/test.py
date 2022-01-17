@@ -30,7 +30,6 @@
 # print(*a)
 
 
-
 import cv2 as cv
 from sklearn.metrics.pairwise import euclidean_distances as edist
 
